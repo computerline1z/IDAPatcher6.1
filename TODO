@@ -1,0 +1,3 @@
+[ ] Implement a dialog with switchable representations of data
+    (ASCII, Hex, Integer, Assembly, etc.)
+[ ] Test on more platforms and with more binary formats

@@ -1,0 +1,8 @@
+Version 0.1.1
+* [GUI] Fixed disappearing menus bug (thanks @AIkuwari)
+* [GUI] Fixed duplicate command entries in the Patches subview
+* [Feature] Expanded support of import hex byte formats. Valid
+            hex formats are: AA \xBB 0xCC with or without spaces.
+
+Version 0.1
+* First public release.
