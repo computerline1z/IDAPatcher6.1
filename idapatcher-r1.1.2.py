@@ -42,7 +42,7 @@ import shutil
 import struct
 import binascii
 
-IDAPATCHER_VERSION = "0.1.1"
+IDAPATCHER_VERSION = "0.1.1.1"
 
 #--------------------------------------------------------------------------
 # Forms
@@ -183,7 +183,8 @@ Import type:                    Patching options:
         'cGroup': Form.ChkGroupControl(("cSize",)),
         'rGroup': Form.RadGroupControl(("rHex", "rString", "rFile")),
 
-        'strPatch': Form.MultiLineTextControl(swidth=80, flags=Form.MultiLineTextControl.TXTF_FIXEDFONT),
+        #'strPatch': Form.MultiLineTextControl(swidth=80, flags=Form.MultiLineTextControl.TXTF_FIXEDFONT),
+        'strPatch': Form.StringInput(tp=None, width=1024, swidth=40, hlp=None, value=None, size=None),
         'impFile': Form.FileInput(swidth=50, open=True),
 
         'FormChangeCb': Form.FormChangeCb(self.OnFormChange),
@@ -528,15 +529,17 @@ class PatchManager():
             return 1
         else:
             self.addmenu_item_ctxs.append(addmenu_item_ctx)
+            print "[*] Add Menu Item -> %s" % (menupath + name)
             return 0
 
     def add_menu_items(self):
-        print "[*] IdaPatcher::add_menu_items()"
+        #print "[*] IdaPatcher::add_menu_items()"
         if self.add_menu_item_helper("View/Open subviews/Problems", "Patches", "", 1, self.show_patches_view, None): return 1
         if self.add_menu_item_helper("Edit/Patch program/", "Edit selection...", "", 0, self.show_edit_form, None):  return 1
         if self.add_menu_item_helper("Edit/Patch program/", "Fill selection...", "", 0, self.show_fill_form, None):  return 1
+        if self.add_menu_item_helper("Edit/", "Import data...", "Shift-I", 0, self.show_import_form, None):   return 1
+        # The last must be fail :(  EPIC FAIL HERE !!!!
         if self.add_menu_item_helper("Edit/Export data...", "Import data...", "Shift-I", 1, self.show_import_form, None):   return 1
-
         return 0
 
     def del_menu_items(self):
